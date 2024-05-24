@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ul, #id_username_helptext, #id_password2_helptext {
+        display:none
+        }
+    </style>
+</head>
+<body>
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<h2 class="text-center">Ro'yhatdan o'tish</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form | crispy}}
+    <input type="submit" value="Ro'yhatdan o'tish" class="btn btn-primary">
+</form>
+{% endblock %}
+</body>
+</html>

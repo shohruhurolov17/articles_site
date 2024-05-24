@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container-fluid">
+    <h2 class="text-center">Maqolani tahrirlash</h2>
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.media }}
+    {{ form | crispy}}
+        <div class="d-flex gap-3">
+            <a class="btn btn-primary" href="{% url 'post_detail' post.pk %}">Orqaga qaytish</a>
+            <input type="submit" value="O'zgarishni saqlash" class="btn btn-success">
+        </div>
+    </form>
+</div>
+{% endblock %}

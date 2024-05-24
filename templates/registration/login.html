@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<h2 class="text-center">Login</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form | crispy}}
+    <div class="d-flex gap-3">
+        <input type="submit" value="Login" class="btn btn-primary">
+        <a class="btn btn-warning" href="{% url 'password_reset' %}">Parolni qayta tiklash</a>
+    </div>
+</form>
+{% endblock %}

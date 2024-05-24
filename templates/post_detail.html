@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load hitcount_tags %}
+{% block content %}
+
+<div class="card">
+    <img src="{{post.photo.url}}" class="card-img-top" height="600">
+    <div class="card-header">
+       <h5> {{post.title}} </h5> <p class="mt-2">Maqola <b>{{post.author}}</b> tomonidan yaratildi | {{post.create_at}}</p>
+    </div>
+    <div class="card-body">
+        {{post.body | safe}}
+    </div>
+    <div class="card-footer d-flex gap-2">
+       {% if post.author == user %}
+            <a href="{% url 'post_update' post.pk %}" class="text-decoration-none">Tahrirlash</a> |
+            <a href="{% url 'post_remove' post.pk %}" class="text-decoration-none">O'chirish</a> |
+        {% else %}
+        {% endif %}
+        <a href="{% url 'post_list' %}" class="text-decoration-none">Barcha maqolalar</a> |
+        <div>
+            <span>{% get_hit_count for post %}</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+            </svg>
+
+        </div>
+    </div>
+</div>
+
+<div class="card mt-5">
+    <div class="card-header fs-5 d-flex align-items-center justify-content-between">
+        <h5 class="text-center">Maqola bo'yicha bildirilgan izohlar ({{ post.comments.all|length}})</h5>
+        <a href="{% url 'post_create_comment' post.pk %}" class="btn btn-primary">+ Izoh qo'shish</a>
+    </div>
+    {% if post.comments.all|length > 0 %}
+
+    {% for comment in post.comments.all %}
+
+    <div class="mx-3 mt-4 d-flex align-items-center justify-content-between">
+       <div>
+           <h5 class="text-primary">{{comment.author}}</h5>
+            <p>{{comment}}</p>
+       </div>
+<!--        {% if comment.author == user %}-->
+<!--            <div class="d-flex gap-3">-->
+<!--                <a class="text-decoration-none text-success" href="#">Tahrirlash</a>-->
+<!--                <a class="text-decoration-none text-danger" href="#">O'chirish</a>-->
+<!--            </div>-->
+<!--        {% else %}-->
+<!--        {% endif %}-->
+    </div>
+    {% endfor %}
+
+    {% else %}
+        <div class="py-5">
+            <h5 class="text-center">Hozir hech qanday izohlar mavjud emas ...</h5>
+        </div>
+    {% endif %}
+
+
+</div>
+{% endblock %}

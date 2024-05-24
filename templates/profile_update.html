@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<h2 class="text-center">Profilni tahrirlash</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form | crispy}}
+    <input type="submit" value="O'zgarishni saqlash" class="btn btn-primary">
+</form>
+{% endblock %}

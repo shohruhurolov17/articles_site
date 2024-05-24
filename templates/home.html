@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="bg-warning p-4 rounded">
+    {% if user.is_authenticated %}
+     <h1 class="display-5">Assalomu aleykum, {{user.username}}</h1>
+  <p class="lead">Maqolalar saytida sizni ko'rib turganimizdan xursandmiz</p>
+  <hr class="my-4">
+  <p>Bu saytda siz yangi maqolalardan xabardor bo'lishingiz va siz ham maqola yaratishingiz mumkin</p>
+  <p class="d-flex gap-3">
+    <a class="btn btn-primary" href="{% url 'post_list' %}" role="button">Maqolalarni ko'rish</a>
+    <a class="btn btn-success" href="{% url 'post_create' %}" role="button">+ Yangi maqola yaratish</a>
+  </p>
+    {% else %}
+     <h3 class="text-center">Siz saytdan ro'yhatdan o'tmagansiz !</h3>
+    <p class="text-center fs-5 mt-4">Saytdagi maqolalalrni ko'rish va siz ham maqolalar yaratishingiz uchun saytdan ro'yhatdan o'tishingiz shart</p>
+    {% endif %}
+
+
+</div>
+{% endblock %}

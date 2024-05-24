@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <h2 class="text-center">Maqolani o'chirish</h2>
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+<p class="text-center my-4">
+    Rostan ham <b>"{{post.title}}"</b>  - maqolani o'chirib tashlamoqchimisiz?
+</p>
+    <div class="d-flex gap-3">
+        <a class="btn btn-primary" href="{% url 'post_detail' post.pk %}">Orqaga qaytish</a>
+        <input type="submit" value="Maqolani o'chirish" class="btn btn-danger">
+    </div>
+    </form>
+</div>
+{% endblock %}
